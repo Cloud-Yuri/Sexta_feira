@@ -73,6 +73,12 @@ def executar_comando_texto(comando):
         elif alvo == "drive":
             abrir_site("drive")
 
+        elif alvo in ["bloco de notas", "notepad"]:
+            subprocess.Popen("notepad")
+
+        elif alvo in ["vscode", "vs code", "visual studio code"]:
+            subprocess.Popen("code", shell=True)
+
         else:
             print(f"[COMANDO] Não sei abrir: {alvo}")
 
