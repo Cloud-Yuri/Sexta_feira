@@ -6,7 +6,7 @@ import os
 from gestos import contar_dedos, detectar_gesto, detectar_joinha, detectar_mao_fechada
 from acoes import executar_acao
 from estado import EstadoSextaFeira
-
+from config import INTERVALO_VERIFICACAO, MOSTRAR_CAMERA, NOME_JANELA
 
 mp_maos = mp.solutions.hands
 mp_desenho = mp.solutions.drawing_utils
@@ -15,7 +15,7 @@ camera = cv2.VideoCapture(0)
 controle = EstadoSextaFeira()
 
 ultimo_check = 0
-intervalo = 2
+intervalo = INTERVALO_VERIFICACAO
 gesto = ""
 
 with mp_maos.Hands(
@@ -87,8 +87,8 @@ with mp_maos.Hands(
                 controle.pausar()
                 print("Sexta-feira PAUSADA por inatividade")
 
-        # Janela desligada
-        # cv2.imshow("Sexta-feira - Gestos", frame)
+        if MOSTRAR_CAMERA:
+            cv2.imshow(NOME_JANELA, frame)
 
         if cv2.waitKey(1) & 0xFF == 27:
             break

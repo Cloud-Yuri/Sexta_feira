@@ -1,14 +1,14 @@
 import time
-
+from config import TEMPO_PARA_CONFIRMAR, TEMPO_SEM_MAO_PARA_PAUSAR
 
 class EstadoSextaFeira:
     def __init__(self):
         self.estado = "pausado"
         self.gesto_anterior = None
         self.inicio_gesto = None
-        self.tempo_para_confirmar = 3
+        self.tempo_para_confirmar = TEMPO_PARA_CONFIRMAR
         self.ultimo_momento_com_mao = time.time()
-        self.tempo_sem_mao_para_pausar = 10
+        self.tempo_sem_mao_para_pausar = TEMPO_SEM_MAO_PARA_PAUSAR
         self.ultimo_gesto_executado = None
 
     def atualizar_mao_detectada(self):
