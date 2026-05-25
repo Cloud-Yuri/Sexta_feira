@@ -65,8 +65,11 @@ def abrir_site(nome_site):
 
 
 def executar_comando_texto(comando):
-    comando = comando.lower().strip()
+    if executar_comando_sensivel(comando):
+        return
 
+def executar_comando_sensivel(comando):
+    comando = comando.lower().strip()
     if comando == "":
         return
 
