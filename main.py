@@ -7,6 +7,8 @@ from gestos import contar_dedos, detectar_gesto, detectar_joinha, detectar_mao_f
 from acoes import executar_acao
 from estado import EstadoSextaFeira
 from config import INTERVALO_VERIFICACAO, MOSTRAR_CAMERA, NOME_JANELA
+from logger import log_estado, log_gesto
+
 
 mp_maos = mp.solutions.hands
 mp_desenho = mp.solutions.drawing_utils
@@ -54,7 +56,7 @@ with mp_maos.Hands(
                         gesto = detectar_gesto(qtd_dedos)
 
                     texto = f"{controle.estado} | {gesto}"
-                    print(texto)
+                    log_gesto(controle.estado, gesto)
 
                     if controle.mudou_gesto(gesto):
                         ultimo_check = agora
@@ -65,14 +67,14 @@ with mp_maos.Hands(
                     if controle.estado == "pausado":
                         if gesto == "paz" and tempo_seguro >= controle.tempo_para_confirmar:
                             controle.ativar()
-                            print("Sexta-feira ATIVA")
+                            log_estado("Sexta-feira ATIVA")
 
                     elif controle.estado == "ativo":
                         if gesto == "tres":
-                            print(f"Tentando encerrar... {tempo_seguro:.1f}s")
+                            log_estado(f"Tentando encerrar... {tempo_seguro:.1f}s")
 
                             if tempo_seguro >= controle.tempo_para_confirmar:
-                                print("Sexta-feira ENCERRADA")
+                                log_estado("Sexta-feira ENCERRADA")
                                 camera.release()
                                 cv2.destroyAllWindows()
                                 os._exit(0)
@@ -85,7 +87,7 @@ with mp_maos.Hands(
         else:
             if controle.deve_pausar_por_inatividade():
                 controle.pausar()
-                print("Sexta-feira PAUSADA por inatividade")
+                log_estado("Sexta-feira PAUSADA por inatividade")
 
         if MOSTRAR_CAMERA:
             cv2.imshow(NOME_JANELA, frame)
