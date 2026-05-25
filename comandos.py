@@ -110,6 +110,12 @@ def executar_comando_sensivel(comando):
         else:
             print("[CANCELADO] Reinicialização cancelada.")
 
+    elif comando in ["digitar", "ditar"]:
+        texto = ouvir_comando()
+
+        if texto:
+            pyautogui.write(texto)
+
     elif comando in ["suspender pc", "suspender computador"]:
         if confirmar_acao("[CONFIRMAÇÃO] Tem certeza que quer suspender o PC?"):
             os.system("rundll32.exe powrprof.dll,SetSuspendState 0,1,0")
