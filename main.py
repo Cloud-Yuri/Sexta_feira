@@ -3,6 +3,7 @@ import mediapipe as mp
 import time
 import os
 
+from voz import ouvir_comando
 from gestos import contar_dedos, detectar_gesto, detectar_joinha, detectar_mao_fechada
 from acoes import executar_acao
 from estado import EstadoSextaFeira
@@ -72,7 +73,7 @@ with mp_maos.Hands(
 
                     elif controle.estado == "ativo":
                         if gesto == "um":
-                            comando = input("Digite o comando: ")
+                            comando = ouvir_comando()
                             executar_comando_texto(comando)
                             controle.marcar_executado(gesto)
                             ultimo_check = agora
