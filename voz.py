@@ -21,3 +21,12 @@ def ouvir_comando():
     except sr.RequestError:
         print("[VOZ] Erro ao acessar o serviço de reconhecimento.")
         return ""
+def aguardar_palavra_ativacao():
+    print("[VOZ] Aguardando palavra de ativação: 'sexta-feira'")
+
+    while True:
+        comando = ouvir_comando()
+
+        if "sexta-feira" in comando.lower() or "sexta feira" in comando.lower():
+            print("[VOZ] Palavra de ativação detectada.")
+            return
