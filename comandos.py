@@ -3,6 +3,47 @@ import subprocess
 import pyautogui
 import webbrowser
 
+def mostrar_help():
+    print("""
+========== AJUDA - SEXTA-FEIRA ==========
+
+GESTOS:
+- Paz por 3s: ativa a Sexta-feira
+- 1 dedo: abre comando por texto
+- Mão fechada: fecha a janela atual
+- Mão aberta: abre o Explorador de Arquivos
+- Joinha: abre a pesquisa do Windows
+- 4 dedos: abre o menu Iniciar
+- 3 dedos por 3s: encerra a Sexta-feira
+
+COMANDOS DE TEXTO:
+- help
+- abrir chrome
+- abrir explorador
+- abrir pesquisa
+- abrir youtube
+- abrir github
+- abrir google
+- abrir chatgpt
+- abrir gmail
+- abrir drive
+- abrir vscode
+- abrir bloco de notas
+- pesquisar <termo>
+- abrir site <nome ou url>
+- fechar janela
+- cancelar desligamento
+
+COMANDOS SENSÍVEIS:
+- desligar pc
+- reiniciar pc
+- suspender pc
+
+Obs: comandos sensíveis pedem confirmação com 'sim'.
+
+=========================================
+""")
+
 def confirmar_acao(mensagem):
     resposta = input(f"{mensagem} Digite 'sim' para confirmar: ")
     return resposta.lower().strip() == "sim"
@@ -29,7 +70,10 @@ def executar_comando_texto(comando):
     if comando == "":
         return
 
-    if comando in ["abrir chrome", "chrome"]:
+    if comando in ["help", "ajuda", "comandos"]:
+        mostrar_help()
+
+    elif comando in ["abrir chrome", "chrome"]:
         subprocess.Popen("start chrome", shell=True)
 
     elif comando in ["abrir explorador", "explorador", "arquivos"]:
