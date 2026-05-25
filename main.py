@@ -8,6 +8,7 @@ from acoes import executar_acao
 from estado import EstadoSextaFeira
 from config import INTERVALO_VERIFICACAO, MOSTRAR_CAMERA, NOME_JANELA
 from logger import log_estado, log_gesto
+from comandos import executar_comando_texto
 
 
 mp_maos = mp.solutions.hands
@@ -70,6 +71,13 @@ with mp_maos.Hands(
                             log_estado("Sexta-feira ATIVA")
 
                     elif controle.estado == "ativo":
+                        if gesto == "um":
+                            comando = input("Digite o comando: ")
+                            executar_comando_texto(comando)
+                            controle.marcar_executado(gesto)
+                            ultimo_check = agora
+                            continue
+
                         if gesto == "tres":
                             log_estado(f"Tentando encerrar... {tempo_seguro:.1f}s")
 
