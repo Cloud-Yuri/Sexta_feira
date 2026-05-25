@@ -2,6 +2,7 @@ import os
 import subprocess
 import pyautogui
 import webbrowser
+from voz import ouvir_comando
 
 def mostrar_help():
     print("""
@@ -75,6 +76,10 @@ def executar_comando_sensivel(comando):
 
     if comando in ["help", "ajuda", "comandos"]:
         mostrar_help()
+    
+    elif comando in ["ouvir", "escutar", "voz"]:
+        comando_voz = ouvir_comando()
+        executar_comando_texto(comando_voz)
 
     elif comando in ["abrir chrome", "chrome"]:
         subprocess.Popen("start chrome", shell=True)
