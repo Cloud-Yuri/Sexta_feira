@@ -3,6 +3,9 @@ import subprocess
 import pyautogui
 import webbrowser
 
+def confirmar_acao(mensagem):
+    resposta = input(f"{mensagem} Digite 'sim' para confirmar: ")
+    return resposta.lower().strip() == "sim"
 
 def abrir_site(nome_site):
     sites = {
@@ -42,6 +45,24 @@ def executar_comando_texto(comando):
     elif comando.startswith("abrir site "):
         site = comando.replace("abrir site ", "", 1).strip()
         abrir_site(site)
+    
+    elif comando in ["desligar pc", "desligar computador"]:
+        if confirmar_acao("[CONFIRMAÇÃO] Tem certeza que quer desligar o PC?"):
+            os.system("shutdown /s /t 0")
+        else:
+            print("[CANCELADO] Desligamento cancelado.")
+
+    elif comando in ["reiniciar pc", "reiniciar computador"]:
+        if confirmar_acao("[CONFIRMAÇÃO] Tem certeza que quer reiniciar o PC?"):
+            os.system("shutdown /r /t 0")
+        else:
+            print("[CANCELADO] Reinicialização cancelada.")
+
+    elif comando in ["suspender pc", "suspender computador"]:
+        if confirmar_acao("[CONFIRMAÇÃO] Tem certeza que quer suspender o PC?"):
+            os.system("rundll32.exe powrprof.dll,SetSuspendState 0,1,0")
+        else:
+            print("[CANCELADO] Suspensão cancelada.")
 
     elif comando.startswith("abrir "):
         alvo = comando.replace("abrir ", "", 1).strip()
