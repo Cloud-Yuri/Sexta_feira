@@ -19,6 +19,8 @@ GESTOS:
 
 COMANDOS DE TEXTO:
 - help
+- ouvir
+- digitar
 - abrir chrome
 - abrir explorador
 - abrir pesquisa
@@ -34,6 +36,10 @@ COMANDOS DE TEXTO:
 - abrir site <nome ou url>
 - fechar janela
 - cancelar desligamento
+
+COMANDOS POR VOZ:
+- ouvir: escuta um comando por voz
+- digitar: escuta uma fala e digita onde o cursor estiver
 
 COMANDOS SENSÍVEIS:
 - desligar pc
